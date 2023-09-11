@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Homepage</title>
+    <title>Contact Us</title>
 </head>
 <body>
-    @extends('layouts.app')
-    @section('content')
-    <h1>This is the Home page...</h1>
-    @endsection
-   
-    
+    <div>
+        @extends('layouts.app')
+        @section('content')
+            <h2>Our Contact mail: piash@gmail.com</h2>
+        @endsection
+    </div>
 </body>
 </html>
