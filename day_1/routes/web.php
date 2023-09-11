@@ -10,3 +10,5 @@ Route ::get('/service',[newController::class,'service'])->name('service');
 Route::get('/about-us',[newController::class,'aboutUs'])->name('aboutUs');
 Route ::get('/contact-us',[newController::class,'contactUs'])->name('contactUs');
 Route::get('/our-team',[newController::class,'ourTeam'])->name('ourTeam');
+Route::get('/student-info-form',[newController::class,'viewForm'])->name('studentInfo');
+Route::post('/submitForm',[newController::class,'output'])->name('studentForm');

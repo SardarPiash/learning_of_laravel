@@ -33,5 +33,31 @@ class newController extends Controller
     public function contactUs(){
         return view ('contactUs');
     }
+
+    public function viewForm(){
+        return view ('pages.studentForm.studentForm');
+    }
+    public function output(Request $request){
+       $rules=[
+        "name"=>'required|string',
+        "id"=>'required|numeric',
+        "dept"=>'required|string'
+       ];
+       $messages=[
+        "required.name"=>"Enter The full Name!",
+        "required.id"=>"Enter your student Id!"
+       ];
+       
+        $this->validate($request,$rules,$messages);
+        $name = $request->name;
+        $id = $request->id;
+        $dept= $request->dept;
+        return view ('pages.studentForm.studentinfo')
+        ->with('name',$name)
+        ->with('id',$id)
+        ->with('dept',$dept);
+    }
+    
+
     
 }
