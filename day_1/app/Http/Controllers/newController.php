@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Student;
 
 
 class newController extends Controller
@@ -49,13 +50,16 @@ class newController extends Controller
        ];
        
         $this->validate($request,$rules,$messages);
-        $name = $request->name;
-        $id = $request->id;
-        $dept= $request->dept;
+        $student= new Student();
+        $student->name = $request->name;
+        $student->id = $request->id;
+        $student->dept= $request->dept;
+        $student->save();
+
         return view ('pages.studentForm.studentinfo')
-        ->with('name',$name)
-        ->with('id',$id)
-        ->with('dept',$dept);
+        ->with('name',$request->name)
+        ->with('id',$request->id)
+        ->with('dept',$request->dept);
     }
     
 
