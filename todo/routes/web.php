@@ -25,3 +25,10 @@ Route::get('/Registration',[SystemController::class,'registrationForm'])->name('
 Route::post('/Registration-submission',[SystemController::class,'registrationFormSubmission'])->name('registrationFormSubmission');
 Route::get('/Login',[SystemController::class,'loginForm'])->name('loginForm');
 Route::post('/Login-submission',[SystemController::class,'loginFormSubmission'])->name('loginFormSubmission');
+
+//Request for Admin Controller......
+Route ::get('/Admin-dashboard',[AdminController::class,'viewAdminDashboard'])->name('viewAdminDashboard');
+
+
+//Request for User Controller.....
+Route ::get('/User-dashboard',[UserController::class,'viewUserDashboard'])->name('viewUserDashboard');
