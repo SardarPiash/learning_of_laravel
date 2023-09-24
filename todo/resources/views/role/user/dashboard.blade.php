@@ -4,9 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Admin Dashboard</title>
 </head>
 <body>
-    <p>User</p>
+    <div>
+        <h2>User Dashboard</h2>
+    <ul>
+        <li>UserName: {{$name}}</li>
+        <li>Email: {{$email}}</li>
+        <li>Status: {{$status}}</li>
+    </ul>
+   <div>
+    <form action="{{route('seetodolist')}}" method="POST">
+        @csrf
+        <input type="submit" value="See ToDo ">
+    </form>
+    <form action="{{route('addtodo')}}" method="POST">
+        @csrf
+        <input type="submit" value="Add ToDo ">
+    </form>
+   </div>
+    
+    </div>
 </body>
 </html>

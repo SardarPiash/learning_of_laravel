@@ -75,7 +75,8 @@ class SystemController extends Controller
                             return redirect()->route('loginForm')->withErrors(['logerror' => 'Needs to approved by an Admin']);
                         }
                     } else if($dbStatus ==="user") {
-                        return redirect()->route('viewUserDashboard');
+                        return redirect()->route('viewUserDashboard')
+                        ->with('email',$dbEmail);
                     }
                 } else {
                     return redirect()->route('loginForm')->withErrors(['logerror' => 'Password Invalid']);

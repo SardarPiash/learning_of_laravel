@@ -32,3 +32,5 @@ Route ::get('/Admin-dashboard',[AdminController::class,'viewAdminDashboard'])->n
 
 //Request for User Controller.....
 Route ::get('/User-dashboard',[UserController::class,'viewUserDashboard'])->name('viewUserDashboard');
+Route::post('/Todo-list',[UserController::class,'seetodolist'])->name('seetodolist');
+Route::post('/Add-Todo',[UserController::class,'addtodo'])->name('addtodo');
