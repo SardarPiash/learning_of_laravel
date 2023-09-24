@@ -21,7 +21,7 @@ Route::get('/', function () {
 });
 
 //Request For System Controller.........
-Route::get('/Registration',[SystemController::class,'registrationForm'])->name('registrationForm');
+//Route::get('/Registration',[SystemController::class,'registrationForm'])->name('registrationForm');
 Route::post('/Registration-submission',[SystemController::class,'registrationFormSubmission'])->name('registrationFormSubmission');
 Route::get('/Login',[SystemController::class,'loginForm'])->name('loginForm');
 Route::post('/Login-submission',[SystemController::class,'loginFormSubmission'])->name('loginFormSubmission');
