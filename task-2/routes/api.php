@@ -21,6 +21,8 @@ Route::get('unverified', [AuthController::class, 'unverified'])->name('unverifie
 Route::post('login', [AuthController::class, 'login'])->name('login');
 
 Route::middleware('auth:sanctum')->group(function(){
-    Route::get('user', [AuthController::class, 'user']);
+    Route::post('user', [AuthController::class, 'user']);
     Route::post('logout', [AuthController::class, 'logout']);
+    Route::post('addTodo', [AuthController::class, 'addTodo']);
+    Route::post('seeTodo', [AuthController::class, 'seeTodo']);
 });
