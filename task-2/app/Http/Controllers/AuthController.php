@@ -99,46 +99,44 @@ public function user(Request $request)
     }
 }
 
-public function addTodo(Request $request)
+public function addTodo(Request $request, $userId)
 {
-    $id = $request->id;
-    
-    if (Auth::id() == $id) {
-        try {
-            $validatedData = [
-                'todoName' => 'required|string',
-                'todoList' => 'required|string', 
-                'date' => 'required|string',
-            ];
-    
-            $messages = [
-                "required.todoName" => "Enter the to-do Name!",
-                "required.todoList" => "Enter your to-do list!",
-                "required.date" => "Enter a date!", 
-            ];
-            $validator = Validator::make($request->all(), $validatedData, $messages);
+    if (Auth::id() != $userId) {
+        return response()->json(['message' => 'Unauthorized'], 401);
+    }
 
-            if ($validator->fails()) {
-                return response()->json(['message' => $validator->errors()->first()], 422);
-            } else {
-                $todo = new Todo();
-                $todo->userId = $request->id;
-                $todo->userName = $request->userName;
-                $todo->todoName = $request->todoName;
-                $todo->todoList = $request->todoList;
-                $todo->date = $request->date;
-                $todo->save();
-                return response()->json(['message' => 'Successful'], 200);
-            }
-        } catch (\Exception $e) {
-            return response()->json(['error' => 'Something went wrong.'], 500);
+    try {
+        $validatedData = [
+            'todoname' => 'required|string',
+            'todolist' => 'required|string', 
+            'date' => 'required|string',
+        ];
+
+        $messages = [
+            'required.todoname' => 'Enter the to-do Name!',
+            'required.todolist' => 'Enter your to-do list!',
+            'required.date' => 'Enter a date!', 
+        ];
+
+        $validator = Validator::make($request->all(), $validatedData, $messages);
+
+        if ($validator->fails()) {
+            return response()->json(['message' => $validator->errors()->first()], 422);
         }
-    } else {
-        return response()->json([
-            'message' => 'Unauthorized'
-        ], 401);
+        $todo = new Todo();
+        $todo->userId = $userId;
+        $todo->userName = Auth::user()->name; 
+        $todo->todoname = $request->input('todoname');
+        $todo->todolist = $request->input('todolist');
+        $todo->date = $request->input('date');
+        $todo->save();
+
+        return response()->json(['message' => 'Successful'], 200);
+    } catch (\Exception $e) {
+        return response()->json(['error' => 'Something went wrong.'], 500);
     }
 }
+
 
 
 
@@ -161,20 +159,18 @@ public function seeTodo(Request $request)
     }
 }
 
-public function deleteTodo(Request $request)
+public function deleteTodo(Request $request,$id)
 {
-    $id = $request->id;
-    $userId = $request->userId;
+    $userId = $request->input('userIdid');
 
-    if (Auth::id() == $userId) {
+    if (Auth::id() == $id) {
         try {
-            $todo = Todo::find($id);
+            $todo = Todo::find($userId);
 
             if (!$todo) {
                 return response()->json(['message' => 'Todo not found'], 404);
             }
-            ///check if id is not for valid userId............
-            if ($todo->userId != $userId) {
+            if ($todo->userId != $id) {
                 return response()->json(['message' => 'Unauthorized'], 401);
             }
             $todo->delete();

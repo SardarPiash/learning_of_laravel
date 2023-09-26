@@ -23,7 +23,7 @@ Route::post('login', [AuthController::class, 'login'])->name('login');
 Route::middleware('auth:sanctum')->group(function(){
     Route::post('user', [AuthController::class, 'user']);
     Route::post('logout', [AuthController::class, 'logout']);
-    Route::post('addTodo', [AuthController::class, 'addTodo']);
+    Route::post('addTodo/{userId}', [AuthController::class, 'addTodo']);
     Route::post('seeTodo', [AuthController::class, 'seeTodo']);
-    Route::post('deleteTodo', [AuthController::class, 'deleteTodo']);
+    Route::delete('deleteTodo/{id}', [AuthController::class, 'deleteTodo']);
 });
