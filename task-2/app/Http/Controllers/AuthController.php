@@ -161,6 +161,34 @@ public function seeTodo(Request $request)
     }
 }
 
+public function deleteTodo(Request $request)
+{
+    $id = $request->id;
+    $userId = $request->userId;
+
+    if (Auth::id() == $userId) {
+        try {
+            $todo = Todo::find($id);
+
+            if (!$todo) {
+                return response()->json(['message' => 'Todo not found'], 404);
+            }
+            ///check if id is not for valid userId............
+            if ($todo->userId != $userId) {
+                return response()->json(['message' => 'Unauthorized'], 401);
+            }
+            $todo->delete();
+
+            return response()->json(['message' => 'Todo deleted'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Something went wrong.'], 500);
+        }
+    } else {
+        return response()->json([
+            'message' => 'Unauthorized'
+        ], 401);
+    }
+}
 
 
 

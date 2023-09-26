@@ -25,4 +25,5 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::post('logout', [AuthController::class, 'logout']);
     Route::post('addTodo', [AuthController::class, 'addTodo']);
     Route::post('seeTodo', [AuthController::class, 'seeTodo']);
+    Route::post('deleteTodo', [AuthController::class, 'deleteTodo']);
 });
